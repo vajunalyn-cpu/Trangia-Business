@@ -1,0 +1,315 @@
+.section {
+  background:
+    radial-gradient(50% 60% at 55% 55%, rgba(212, 175, 55, 0.08), transparent 70%),
+    var(--navy);
+}
+.layout {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr) 22rem;
+  grid-template-areas:
+    "head head head"
+    "list map panel";
+  gap: 2rem clamp(1.5rem, 1rem + 2vw, 3rem);
+  align-items: start;
+}
+.head {
+  grid-area: head;
+  max-width: 44rem;
+  margin-bottom: 1rem;
+}
+.head :global(.lede) {
+  margin-top: 1.25rem;
+}
+
+/* Region list */
+.list {
+  grid-area: list;
+  display: grid;
+  gap: 1.5rem;
+}
+.group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.groupName {
+  font-family: var(--font-body);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--champagne);
+  margin-bottom: 0.4rem;
+}
+.item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 4.6rem 1fr;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.38rem 0.5rem;
+  background: none;
+  border: 0;
+  border-left: 2px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  color: var(--on-navy-soft);
+  font-size: var(--t-xs);
+  line-height: 1.3;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.item:hover {
+  color: var(--white);
+  background: rgba(232, 213, 168, 0.05);
+}
+.item[aria-pressed="true"] {
+  color: var(--white);
+  border-left-color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
+}
+.code {
+  font-weight: 600;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.itemName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobileSelect {
+  display: none;
+}
+
+/* Map */
+.mapWrap {
+  grid-area: map;
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+.map {
+  width: 100%;
+  max-height: min(78vh, 860px);
+  height: auto;
+  overflow: visible;
+}
+.region {
+  fill: rgba(232, 213, 168, 0.1);
+  stroke: rgba(232, 213, 168, 0.45);
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.25s var(--ease), stroke 0.25s var(--ease);
+}
+.region[data-hovered="true"] {
+  fill: rgba(232, 213, 168, 0.28);
+  stroke: var(--champagne);
+}
+.region[data-selected="true"] {
+  fill: var(--gold);
+  stroke: #f5dd8c;
+  stroke-width: 1.4;
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.55));
+}
+.zone rect {
+  fill: var(--white);
+  stroke: var(--navy);
+  stroke-width: 2;
+}
+.zone[data-in-region="true"] rect {
+  fill: var(--navy);
+  stroke: var(--white);
+}
+.mapLabel {
+  pointer-events: none;
+  transition: transform 0.35s var(--ease);
+}
+.mapLabel text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  fill: var(--white);
+  paint-order: stroke;
+  stroke: var(--navy-deep);
+  stroke-width: 6px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+.toggle {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--t-xs);
+  color: var(--on-navy-soft);
+  cursor: pointer;
+}
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.toggleMark {
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(232, 213, 168, 0.2);
+  position: relative;
+  transition: background-color 0.2s var(--ease);
+}
+.toggleMark::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ivory);
+  transition: transform 0.2s var(--ease);
+}
+.toggle input:checked + .toggleMark {
+  background: var(--gold);
+}
+.toggle input:checked + .toggleMark::after {
+  transform: translateX(14px);
+  background: var(--navy);
+}
+.toggle input:focus-visible + .toggleMark {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Panel */
+.panel {
+  grid-area: panel;
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+  padding: 1.75rem;
+  border: 1px solid var(--navy-line);
+  border-top: 2px solid var(--gold);
+  background: rgba(14, 29, 56, 0.6);
+  border-radius: 0 0 var(--radius-m) var(--radius-m);
+  animation: panelIn 0.4s var(--ease);
+}
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.panelGroup {
+  font-size: var(--t-xs);
+  color: var(--champagne);
+}
+.panelTitle {
+  margin-top: 0.35rem;
+  font-size: var(--t-xl);
+  color: var(--white);
+}
+.area {
+  margin-top: 0.4rem;
+  font-size: var(--t-sm);
+  color: var(--on-navy-soft);
+}
+.subhead {
+  margin-top: 1.4rem;
+  font-family: var(--font-body);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+}
+.provinces {
+  margin-top: 0.35rem;
+  font-size: var(--t-sm);
+  color: var(--on-navy);
+}
+.bullets {
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.3rem;
+  font-size: var(--t-sm);
+}
+.bullets li {
+  padding-left: 1rem;
+  position: relative;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+.empty {
+  margin-top: 1.4rem;
+  font-size: var(--t-sm);
+  color: var(--on-navy-soft);
+}
+.panelCta {
+  margin-top: 1.75rem;
+  width: 100%;
+}
+.sources {
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    grid-template-areas:
+      "head head"
+      "select select"
+      "map panel";
+  }
+  .list {
+    display: none;
+  }
+  .mobileSelect {
+    grid-area: select;
+    min-width: 0;
+    display: grid;
+    gap: 0.35rem;
+    max-width: 28rem;
+  }
+  .mobileSelect select {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0 0.9rem;
+    background: var(--navy-deep);
+    border: 1px solid rgba(232, 213, 168, 0.35);
+    border-radius: var(--radius-s);
+    color: var(--white);
+  }
+}
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "select"
+      "map"
+      "panel";
+  }
+  .map {
+    max-height: 70vh;
+  }
+  .toggle {
+    position: static;
+    margin-top: 1rem;
+    justify-self: start;
+  }
+  .panel {
+    position: static;
+  }
+}

@@ -1,0 +1,323 @@
+/* Trangia Business — design tokens and base styles.
+   Brand palette is fixed by the brand guideline; derived tones exist only where
+   the brand colours fail contrast for text, and are named for that job. */
+
+:root {
+  --white: #ffffff;
+  --ivory: #f7f3eb;
+  --gold: #d4af37;
+  --champagne: #e8d5a8;
+  --navy: #162a4d;
+
+  /* Derived: text-safe gold on light grounds (4.9:1 on white), deeper navy for depth */
+  --gold-ink: #7d6315;
+  --navy-deep: #0e1d38;
+  --navy-line: rgba(232, 213, 168, 0.18);
+  --ink: #162a4d;
+  --ink-soft: #4a5875;
+  --rule: rgba(22, 42, 77, 0.14);
+  --on-navy: #f7f3eb;
+  --on-navy-soft: rgba(247, 243, 235, 0.72);
+
+  --font-display: var(--font-manrope), "Manrope", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  /* Type scale: 1.25 ratio from 16px, display sizes fluid */
+  --t-xs: 0.8125rem;
+  --t-sm: 0.9375rem;
+  --t-md: 1.0625rem;
+  --t-lg: 1.25rem;
+  --t-xl: 1.5625rem;
+  --t-2xl: clamp(1.75rem, 1.2rem + 1.8vw, 2.44rem);
+  --t-3xl: clamp(2.2rem, 1.4rem + 2.8vw, 3.4rem);
+  --t-4xl: clamp(2.6rem, 1.5rem + 4.2vw, 4.75rem);
+
+  --gutter: clamp(1rem, 0.4rem + 3vw, 3rem);
+  --max: 1240px;
+  --header-h: 72px;
+  --radius-s: 4px;
+  --radius-m: 10px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--t-md);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.on-light :focus-visible,
+.on-light:focus-visible {
+  outline-color: var(--navy);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-s);
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Surfaces ---------- */
+.surface-navy {
+  background: var(--navy);
+  color: var(--on-navy);
+}
+.surface-ivory {
+  background: var(--ivory);
+}
+.surface-white {
+  background: var(--white);
+}
+
+.section {
+  padding-block: clamp(4rem, 2.5rem + 6vw, 8rem);
+}
+
+/* ---------- Type helpers ---------- */
+.display {
+  font-size: var(--t-4xl);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+.h2 {
+  font-size: var(--t-3xl);
+}
+.h3 {
+  font-size: var(--t-xl);
+  letter-spacing: -0.01em;
+}
+.lede {
+  font-size: var(--t-lg);
+  line-height: 1.55;
+  max-width: 38em;
+  color: var(--ink-soft);
+}
+.surface-navy .lede {
+  color: var(--on-navy-soft);
+}
+.muted {
+  color: var(--ink-soft);
+}
+.surface-navy .muted {
+  color: var(--on-navy-soft);
+}
+.small {
+  font-size: var(--t-sm);
+}
+.xs {
+  font-size: var(--t-xs);
+}
+.measure {
+  max-width: 40em;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-s);
+  font-family: var(--font-body);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+  box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+}
+.btn-gold:hover {
+  background: #dcbb4c;
+  box-shadow: 0 8px 28px -8px rgba(212, 175, 55, 0.55);
+}
+.btn-line {
+  border-color: rgba(232, 213, 168, 0.5);
+  color: var(--on-navy);
+  background: transparent;
+}
+.btn-line:hover {
+  border-color: var(--gold);
+  color: var(--white);
+}
+.btn-navy {
+  background: var(--navy);
+  color: var(--ivory);
+}
+.btn-navy:hover {
+  background: var(--navy-deep);
+}
+.btn-ghost-dark {
+  border-color: var(--rule);
+  color: var(--navy);
+  background: transparent;
+}
+.btn-ghost-dark:hover {
+  border-color: var(--navy);
+}
+
+.text-link {
+  color: var(--gold-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+.surface-navy .text-link {
+  color: var(--gold);
+}
+.text-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Gold hairline that marks a section's anchor point */
+.rule-gold {
+  width: 56px;
+  height: 2px;
+  background: var(--gold);
+  border: 0;
+  margin: 0 0 1.5rem;
+}
+
+/* Source citation chips */
+.cite {
+  font-size: var(--t-xs);
+  color: var(--ink-soft);
+}
+.surface-navy .cite {
+  color: var(--on-navy-soft);
+}
+.cite a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+/* ---------- Print: only the calculator report ---------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #calculator-report,
+  #calculator-report * {
+    visibility: visible;
+  }
+  #calculator-report {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    color: #000;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

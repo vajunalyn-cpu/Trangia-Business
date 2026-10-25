@@ -1,0 +1,45 @@
+.band {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: clamp(5rem, 3rem + 8vw, 10rem);
+}
+.media {
+  position: absolute;
+  inset: 0 0 0 38%;
+  z-index: -1;
+  background: var(--navy-deep);
+}
+.media :global(img) {
+  object-position: 70% 50%;
+}
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--navy-deep) 0%, rgba(14, 29, 56, 0.55) 35%, rgba(14, 29, 56, 0.15) 100%);
+}
+.band {
+  background: var(--navy-deep);
+}
+@media (max-width: 900px) {
+  .media {
+    inset: 0;
+    opacity: 0.35;
+  }
+}
+.inner {
+  max-width: var(--max);
+}
+.inner > * {
+  max-width: 36rem;
+}
+.inner :global(.lede) {
+  margin-top: 1.25rem;
+}
+.ctas {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

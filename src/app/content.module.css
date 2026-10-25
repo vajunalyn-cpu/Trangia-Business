@@ -1,0 +1,217 @@
+/* Shared layout pieces for inner pages */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 1rem + 4vw, 5rem);
+  align-items: start;
+}
+.prose {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  max-width: 36em;
+  color: var(--ink-soft);
+}
+.cite {
+  margin-top: 1.25rem;
+  font-size: var(--t-xs);
+  color: var(--ink-soft);
+}
+.leadGap {
+  margin-top: 1.25rem;
+}
+.stepsGap {
+  margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+.figure {
+  margin: 0;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  background: var(--navy);
+  color: var(--on-navy);
+  border-radius: var(--radius-m);
+}
+.figure .cite {
+  color: var(--on-navy-soft);
+}
+.figTitle {
+  font-size: var(--t-sm);
+  color: var(--on-navy-soft);
+  max-width: 22rem;
+}
+.big {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--t-3xl);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 0.35rem;
+}
+.stack {
+  margin-top: 1.5rem;
+  display: flex;
+  height: 14px;
+  gap: 3px;
+}
+.stack span {
+  min-width: 4px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+.stack span:nth-child(2) {
+  background: var(--champagne);
+}
+.stack span:nth-child(3) {
+  background: #b08a1e;
+}
+.stack span:nth-child(4) {
+  background: #f1e6c8;
+}
+.stack span:nth-child(5) {
+  background: #8c7a4a;
+}
+.breakdown {
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.breakdown > div {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  font-size: var(--t-sm);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--navy-line);
+}
+.breakdown > div::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+.breakdown > div:nth-child(2)::before {
+  background: var(--champagne);
+}
+.breakdown > div:nth-child(3)::before {
+  background: #b08a1e;
+}
+.breakdown > div:nth-child(4)::before {
+  background: #f1e6c8;
+}
+.breakdown > div:nth-child(5)::before {
+  background: #8c7a4a;
+}
+.breakdown dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.defs {
+  margin: clamp(2rem, 1.5rem + 2vw, 3rem) 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+.defs > div {
+  padding: 1.5rem 2rem 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.defs > div:nth-child(even) {
+  padding-left: 2rem;
+  border-left: 1px solid var(--rule);
+}
+.defs dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-lg);
+}
+.defs dd {
+  margin: 0.5rem 0 0;
+  color: var(--ink-soft);
+  max-width: 34em;
+}
+.tiers {
+  margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.tier {
+  padding: 1.75rem;
+  border-radius: var(--radius-m);
+  background: var(--white);
+  border: 1px solid var(--rule);
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+}
+.tier:nth-child(2) {
+  border-top: 3px solid var(--champagne);
+}
+.tier:nth-child(3) {
+  border-top: 3px solid var(--gold);
+}
+.tier:first-child {
+  border-top: 3px solid var(--navy);
+}
+.tierName {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-xl);
+}
+.tierBody {
+  color: var(--ink-soft);
+  font-size: var(--t-sm);
+}
+.callout {
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-left: 3px solid var(--gold);
+  background: var(--ivory);
+}
+.callout h3 {
+  font-size: var(--t-xl);
+}
+.callout p {
+  margin-top: 0.75rem;
+  color: var(--ink-soft);
+}
+.formLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 1rem + 4vw, 5rem);
+  align-items: start;
+}
+.legal {
+  max-width: 44rem;
+  display: grid;
+  gap: 1rem;
+}
+.legal h2 {
+  font-size: var(--t-xl);
+  margin-top: 1.5rem;
+}
+.legal p,
+.legal li {
+  color: var(--ink-soft);
+}
+@media (max-width: 900px) {
+  .split,
+  .formLayout {
+    grid-template-columns: 1fr;
+  }
+  .defs {
+    grid-template-columns: 1fr;
+  }
+  .defs > div:nth-child(even) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .tiers {
+    grid-template-columns: 1fr;
+  }
+}
