@@ -61,7 +61,7 @@ export function Header() {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href.replace(/\/$/, "")));
 
   return (
-    <header className={`${s.header} ${scrolled || mobileOpen ? s.solid : ""}`}>
+    <header className={`${s.header} ${scrolled || mobileOpen || pathname === "/" ? s.solid : ""}`}>
       <div className={`wrap ${s.bar}`}>
         <Link href="/" className={s.brand} aria-label="Trangia Business home">
           <Logo variant="onDark" height={40} priority />

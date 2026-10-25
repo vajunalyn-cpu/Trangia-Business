@@ -66,7 +66,21 @@
   border-left: 1px solid rgba(22, 42, 77, 0.35);
   line-height: 1.25;
 }
+.hub {
+  transition: border-color 0.3s var(--ease);
+}
+.hub:hover {
+  border-left-color: var(--gold);
+}
+.hub:hover .hubName {
+  color: var(--gold-ink);
+}
+.hub:hover::after {
+  transform: scale(1.8);
+  box-shadow: 0 0 0 5px rgba(212, 175, 55, 0.25);
+}
 .hub::after {
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
   content: "";
   position: absolute;
   left: -4px;

@@ -1,9 +1,12 @@
 .section {
+  position: relative;
   background:
     radial-gradient(50% 60% at 55% 55%, rgba(212, 175, 55, 0.08), transparent 70%),
     var(--navy);
 }
 .layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 15rem minmax(0, 1fr) 22rem;
   grid-template-areas:
@@ -103,6 +106,7 @@
 .region[data-hovered="true"] {
   fill: rgba(232, 213, 168, 0.28);
   stroke: var(--champagne);
+  filter: drop-shadow(0 0 10px rgba(232, 213, 168, 0.45));
 }
 .region[data-selected="true"] {
   fill: var(--gold);

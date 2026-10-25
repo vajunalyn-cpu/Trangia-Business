@@ -2,6 +2,7 @@ import Link from "next/link";
 import { media, ambientVideo } from "@/config/brand";
 import { MediaSlot } from "./MediaSlot";
 import { AmbientVideo } from "./AmbientVideo";
+import { Spotlight } from "./fx/Spotlight";
 import s from "./CtaBand.module.css";
 
 export function CtaBand({
@@ -16,6 +17,7 @@ export function CtaBand({
       <div className={s.media} aria-hidden="true">
         {ambientVideo.mp4 ? <AmbientVideo {...ambientVideo} /> : <MediaSlot slot={media.globeRender} sizes="100vw" />}
       </div>
+      <Spotlight />
       <div className={`wrap ${s.inner}`}>
         <h2 id="cta-title" className="h2">
           {title}

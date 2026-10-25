@@ -6,6 +6,7 @@ import { Cite } from "@/components/Cite";
 import { PezaCalculator } from "@/components/calculator/PezaCalculator";
 import { CtaBand } from "@/components/CtaBand";
 import { media } from "@/config/brand";
+import { Tilt } from "@/components/fx/Tilt";
 import s from "../content.module.css";
 
 export const metadata: Metadata = {
@@ -63,7 +64,7 @@ export default function PezaPage() {
               <Cite ids={["peza", "pezaPublicZones"]} />
             </p>
           </div>
-          <figure className={`surface-navy ${s.figure}`}>
+          <Tilt as="figure" className={`surface-navy ${s.figure}`} max={4}>
             <figcaption className={s.figTitle}>
               <span className={s.big}>{zoneTotal}</span> economic zones supervised by PEZA, December 2025
             </figcaption>
@@ -83,7 +84,7 @@ export default function PezaPage() {
             <p className={s.cite}>
               <Cite ids={["pezaZones"]} /> Reported figures; confirm the current count with PEZA.
             </p>
-          </figure>
+          </Tilt>
         </div>
       </section>
 

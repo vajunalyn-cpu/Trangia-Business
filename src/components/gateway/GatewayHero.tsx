@@ -11,7 +11,7 @@ type Label = { name: string; x: number; y: number; visible: boolean };
  * page is interactive; until then (and without WebGL) a static SVG of the same
  * boundaries is shown, so the hero never waits on the 3D scene.
  */
-export function GatewayHero() {
+export function GatewayHero({ progress }: { progress?: () => number }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ready, setReady] = useState(false);
@@ -54,7 +54,7 @@ export function GatewayHero() {
       ro.observe(host);
       scene.resize(host.clientWidth, host.clientHeight);
 
-      const onScroll = () => scene.setProgress(window.scrollY / Math.max(1, host.clientHeight * 0.9));
+      const onScroll = () => scene.setProgress(progress ? progress() : window.scrollY / Math.max(1, host.clientHeight * 0.9));
       onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
 

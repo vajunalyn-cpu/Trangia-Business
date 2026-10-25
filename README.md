@@ -25,7 +25,9 @@ Node 20 or newer.
 src/
   app/                    Pages: /, /peza, /boi, /services, /why-philippines, /inquire, /privacy
   components/
-    gateway/              3D hero (Three.js scene + React wrapper with static fallback)
+    globe/                Home hero: live 3D globe drawn over the client's globe render
+    gateway/              3D archipelago (Three.js) used in the scroll-driven "gateway" section
+    fx/                   Hover effects: Tilt, Magnetic, Spotlight (off for touch and reduced motion)
     calculator/           PEZA incentive calculator UI and chart
     RegionExplorer.tsx    Interactive 18-region map
     InquiryForm.tsx       Lead form (validation, spam protection, consent)
@@ -43,9 +45,11 @@ public/
   brand/                  Logo files
   media/reference/        Client-supplied renders used on the site
   media/flora/            FLORA images go here (see docs/FLORA-ASSETS.md)
-  geo/gateway.json        3D scene geometry
+  geo/gateway.json        3D archipelago geometry
+  geo/land-mask.png       Globe land texture (Natural Earth 1:50m)
 scripts/
   build-geo.mjs           Rebuilds map data from PSA boundaries (`npm run geo`)
+  build-globe.mjs         Rebuilds the globe land texture (needs Playwright)
   optimize-media.py       Converts a downloaded image into the WebP sizes a media slot needs
 docs/                     Deployment, FLORA assets, content checklist
 ```
@@ -54,6 +58,7 @@ docs/                     Deployment, FLORA assets, content checklist
 
 | What | Where | How |
 |---|---|---|
+| Hero globe render | `public/media/reference/trangia-globe-1536.webp` | The 3D globe is aligned to this exact image (globe centre 757, 476; radius 458 px in a 1536 × 1024 frame). If you swap the image, update `PLATE` in `src/components/globe/globeScene.ts` and the ratios at the top of `GlobeHero.module.css`. |
 | Logo | `public/brand/` | The current files are crops from the supplied brand renders. Drop in the official master files with the same names, or change the paths in `src/config/brand.ts`. |
 | FLORA images | `public/media/flora/` | Run `python3 scripts/optimize-media.py <file> public/media/flora/<slot>` then set `available: true` for that slot in `src/config/brand.ts`. Until then a navy-and-gold panel shows instead. |
 | Background film | `src/config/brand.ts` → `ambientVideo` | Optional muted loop behind the closing call-to-action band. The hero stays the interactive 3D scene. See `docs/FLORA-ASSETS.md`. |

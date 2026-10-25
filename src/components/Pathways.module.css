@@ -13,6 +13,8 @@
   border-bottom: 1px solid var(--rule);
 }
 .route {
+  border-radius: var(--radius-m);
+  background: var(--white);
   display: grid;
   grid-template-columns: minmax(110px, 0.42fr) 1fr;
   gap: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);

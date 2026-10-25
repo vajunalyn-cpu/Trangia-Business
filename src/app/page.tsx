@@ -1,4 +1,5 @@
-import { Hero } from "@/components/Hero";
+import { GlobeHero } from "@/components/globe/GlobeHero";
+import { GatewaySection } from "@/components/GatewaySection";
 import { WithinReach } from "@/components/WithinReach";
 import { Pathways } from "@/components/Pathways";
 import { RegionExplorer } from "@/components/RegionExplorer";
@@ -9,7 +10,8 @@ import { CtaBand } from "@/components/CtaBand";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <GlobeHero />
+      <GatewaySection />
       <WithinReach />
       <Pathways />
       <RegionExplorer

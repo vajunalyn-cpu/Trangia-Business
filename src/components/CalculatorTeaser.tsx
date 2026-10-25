@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { calculate } from "@/lib/calc";
+import { Tilt } from "./fx/Tilt";
 import s from "./CalculatorTeaser.module.css";
 
 // A worked example computed by the same engine as the calculator, with its inputs stated.
@@ -41,7 +42,7 @@ export function CalculatorTeaser() {
             Open the calculator
           </Link>
         </div>
-        <figure className={s.example}>
+        <Tilt as="figure" className={s.example}>
           <figcaption className={s.caption}>
             Worked example over 14 years: an export enterprise with ₱100M annual sales, ₱60M cost of sales and ₱15M operating
             expenses.
@@ -58,7 +59,7 @@ export function CalculatorTeaser() {
             ))}
           </ul>
           <p className="cite">Estimated income-related taxes only. Illustrative, not an official determination.</p>
-        </figure>
+        </Tilt>
       </div>
     </section>
   );

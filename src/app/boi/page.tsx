@@ -5,6 +5,7 @@ import { Steps } from "@/components/Steps";
 import { Cite } from "@/components/Cite";
 import { CtaBand } from "@/components/CtaBand";
 import { media } from "@/config/brand";
+import { Tilt } from "@/components/fx/Tilt";
 import s from "../content.module.css";
 
 export const metadata: Metadata = {
@@ -42,18 +43,18 @@ export default function BoiPage() {
             means a longer incentive period. The 2026 plan took effect on 17 June 2026.
           </p>
           <div className={s.tiers}>
-            <article className={s.tier}>
+            <Tilt as="article" className={s.tier}>
               <h3 className={s.tierName}>Tier I</h3>
               <p className={s.tierBody}>Modern basic needs and sustainability-driven industries.</p>
-            </article>
-            <article className={s.tier}>
+            </Tilt>
+            <Tilt as="article" className={s.tier}>
               <h3 className={s.tierName}>Tier II</h3>
               <p className={s.tierBody}>Defense, industrial value-chain gaps and food security.</p>
-            </article>
-            <article className={s.tier}>
+            </Tilt>
+            <Tilt as="article" className={s.tier}>
               <h3 className={s.tierName}>Tier III</h3>
               <p className={s.tierBody}>Science, technology and innovation.</p>
-            </article>
+            </Tilt>
           </div>
           <p className={s.cite}>
             <Cite ids={["sipp2026"]} /> Your exact activity must appear in the SIPP list; we check it before you apply.

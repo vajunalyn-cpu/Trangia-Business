@@ -54,6 +54,20 @@
 .link[aria-expanded="true"] {
   color: var(--white);
 }
+.link::before {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 6px;
+  height: 1px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transition: transform 0.35s var(--ease);
+}
+.link:hover::before {
+  transform: scaleX(1);
+}
 .active {
   color: var(--white);
 }

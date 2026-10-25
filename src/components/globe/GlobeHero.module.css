@@ -1,0 +1,222 @@
+/* Stage geometry is pure CSS (container units) so it is right before any JS runs.
+   Ratios come from the render: 1536 × 1024 px, globe centre (757, 476), radius 458.
+   --R is the on-screen globe radius. */
+
+.hero {
+  position: relative;
+  min-height: max(680px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(60% 70% at 72% 40%, rgba(255, 236, 196, 0.55), transparent 70%),
+    linear-gradient(180deg, #e9ecf1 0%, #f3eee5 60%, var(--ivory) 100%);
+  color: var(--ink);
+}
+.area {
+  position: absolute;
+  inset: 0;
+  container-type: size;
+  touch-action: pan-y;
+}
+.area[data-over="true"] {
+  cursor: grab;
+}
+.area[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.stage {
+  --R: min(39cqh, 27cqw);
+  --cx: 69cqw;
+  --cy: clamp(calc(var(--R) + 84px), 53cqh, calc(100cqh - var(--R) - 16px));
+  position: absolute;
+  width: calc(var(--R) * 3.35371);
+  height: calc(var(--R) * 2.23581);
+  left: calc(var(--cx) - var(--R) * 1.65284);
+  top: calc(var(--cy) - var(--R) * 1.0393);
+  pointer-events: none;
+}
+.plate {
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+}
+/* Fade the render's left and top edges into the hero background */
+.back .plate {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.6) 9%, #000 18%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.6) 9%, #000 18%);
+}
+.back::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 12%;
+  background: linear-gradient(to bottom, #e9ecf1, rgba(233, 236, 241, 0));
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+}
+.front {
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+}
+.area[data-ready="true"] .canvas,
+.area[data-ready="true"] .front {
+  opacity: 1;
+}
+
+/* The pedestal's front lip, so the live globe sits inside the cup */
+.pedestal {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(29% 80%, 30.08% 80.27%, 32.09% 81.68%, 34.10% 82.21%, 36.11% 82.57%, 38.12% 82.85%, 40.14% 83.06%, 42.15% 83.23%, 44.16% 83.35%, 46.17% 83.43%, 48.18% 83.48%, 50.20% 83.50%, 52.21% 83.48%, 54.22% 83.43%, 56.23% 83.35%, 58.24% 83.23%, 60.25% 83.06%, 62.27% 82.85%, 64.28% 82.57%, 66.29% 82.21%, 68.30% 81.68%, 70.31% 80.27%, 71% 80%, 71% 92%, 29% 92%);
+}
+
+/* Gold logo floating in front of the globe (position measured from the render) */
+.logo {
+  position: absolute;
+  left: 33.92%;
+  top: 23.93%;
+  width: 31.71%;
+  aspect-ratio: 487 / 375;
+  transform: translate3d(calc(var(--px, 0) * -6px), calc(var(--py, 0) * -5px), 0);
+  transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+  filter: drop-shadow(0 6px 18px rgba(10, 20, 40, 0.55)) drop-shadow(0 0 0 rgba(255, 214, 120, 0));
+  animation: float 7s ease-in-out infinite;
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.area[data-over="true"] .logo {
+  filter: drop-shadow(0 8px 22px rgba(10, 20, 40, 0.55)) drop-shadow(0 0 22px rgba(255, 214, 120, 0.55));
+}
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 38%, rgba(255, 248, 225, 0.9) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  mix-blend-mode: screen;
+  -webkit-mask: url("/brand/trangia-logo-globe-gold.png") center / 100% 100% no-repeat;
+  mask: url("/brand/trangia-logo-globe-gold.png") center / 100% 100% no-repeat;
+  animation: shimmer 7s var(--ease) infinite 1.5s;
+}
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -1.2%;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: 130% 0;
+  }
+  35%,
+  100% {
+    background-position: -30% 0;
+  }
+}
+
+.hint {
+  position: absolute;
+  left: 69cqw;
+  bottom: 3%;
+  transform: translateX(-50%);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: var(--t-xs);
+  font-weight: 500;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px -10px rgba(22, 42, 77, 0.45);
+  transition: opacity 0.6s var(--ease);
+  pointer-events: none;
+}
+.hint[data-hidden="true"] {
+  opacity: 0;
+}
+
+/* Copy */
+.inner {
+  position: relative;
+  z-index: 2;
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.inner::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 calc(-1 * var(--gutter) - 50vw);
+  width: calc(50vw + 40%);
+  background: linear-gradient(90deg, rgba(247, 243, 235, 0.97) 0%, rgba(247, 243, 235, 0.92) 70%, rgba(247, 243, 235, 0) 100%);
+  z-index: -1;
+}
+.copy {
+  max-width: 33rem;
+  padding-top: var(--header-h);
+  pointer-events: auto;
+}
+.title {
+  color: var(--navy);
+  font-size: clamp(2.4rem, 1.3rem + 3.3vw, 4.1rem);
+}
+.sub {
+  margin-top: 1.5rem;
+  font-size: var(--t-lg);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 27em;
+}
+.ctas {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Stacked layout: globe on top, copy below */
+@media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+  }
+  .area {
+    position: relative;
+    inset: auto;
+    height: min(62svh, 118vw);
+  }
+  .stage {
+    --R: min(41cqw, calc((100cqh - 76px) * 0.44));
+    --cx: 50cqw;
+    --cy: calc(76px + (100cqh - 76px) * 0.5);
+  }
+  .hint {
+    left: 50%;
+    bottom: 2%;
+  }
+  .inner {
+    min-height: 0;
+    padding-bottom: 3rem;
+  }
+  .inner::before {
+    display: none;
+  }
+  .copy {
+    padding-top: 0.5rem;
+  }
+}

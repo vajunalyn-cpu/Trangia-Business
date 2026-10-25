@@ -29,6 +29,8 @@
   }
 }
 .inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--max);
 }
 .inner > * {

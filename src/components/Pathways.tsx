@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { regions, zones, mapViewBox } from "@/content/regions";
+import { Tilt } from "./fx/Tilt";
 import s from "./Pathways.module.css";
 
 // BOI-registered projects can be located across the country; these sample points are
@@ -40,7 +41,7 @@ export function Pathways() {
         </div>
 
         <div className={s.grid}>
-          <article className={s.route}>
+          <Tilt as="article" className={s.route} max={4}>
             <MiniMap mode="peza" />
             <div className={s.body}>
               <h3 className="h3">PEZA</h3>
@@ -64,9 +65,9 @@ export function Pathways() {
                 </Link>
               </div>
             </div>
-          </article>
+          </Tilt>
 
-          <article className={s.route}>
+          <Tilt as="article" className={s.route} max={4}>
             <MiniMap mode="boi" />
             <div className={s.body}>
               <h3 className="h3">BOI</h3>
@@ -87,7 +88,7 @@ export function Pathways() {
                 </Link>
               </div>
             </div>
-          </article>
+          </Tilt>
         </div>
         <p className={`small muted ${s.note}`}>
           Other investment promotion agencies administer freeports and special zones such as Clark and Subic. Tell us about your

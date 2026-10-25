@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useId, useMemo, useState } from "react";
 import { regions, zones, mapViewBox, trangiaFocus, labelOffsets, groups } from "@/content/regions";
 import { Cite } from "./Cite";
+import { Spotlight } from "./fx/Spotlight";
+import { Tilt } from "./fx/Tilt";
 import s from "./RegionExplorer.module.css";
 
 type Props = { initial?: string; headingLevel?: 2 | 3; title?: string; intro?: string };
@@ -31,6 +33,7 @@ export function RegionExplorer({
 
   return (
     <section id="regions" className={`section surface-navy ${s.section}`} aria-labelledby={`${uid}-title`}>
+      <Spotlight />
       <div className={`wrap ${s.layout}`}>
         <header className={s.head}>
           <hr className="rule-gold" />
@@ -89,7 +92,7 @@ export function RegionExplorer({
           </select>
         </div>
 
-        <div className={s.mapWrap}>
+        <Tilt className={s.mapWrap} max={3} glare={false}>
           <svg viewBox={mapViewBox} className={s.map} role="img" aria-label={`Map of the Philippines with ${region.name} selected`}>
             <defs>
               <radialGradient id={`${uid}-glow`}>
@@ -130,7 +133,7 @@ export function RegionExplorer({
             <span className={s.toggleMark} aria-hidden="true" />
             PEZA-operated public zones
           </label>
-        </div>
+        </Tilt>
 
         <article id={`${uid}-panel`} className={s.panel} aria-live="polite" key={region.code}>
           <p className={s.panelGroup}>

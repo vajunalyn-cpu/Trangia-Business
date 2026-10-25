@@ -1,0 +1,95 @@
+.track {
+  position: relative;
+  height: 280vh;
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(14, 29, 56, 0.9) 0%, rgba(14, 29, 56, 0.55) 34%, rgba(14, 29, 56, 0) 58%);
+}
+.inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  pointer-events: none;
+}
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  max-width: 30rem;
+}
+.step {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), filter 0.7s var(--ease);
+}
+.step[data-active="true"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+.title {
+  font-size: var(--t-3xl);
+  color: var(--white);
+}
+.body {
+  margin-top: 1.1rem;
+  font-size: var(--t-lg);
+  color: var(--on-navy-soft);
+}
+.foot {
+  margin-top: 2.25rem;
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  pointer-events: auto;
+}
+.ticks {
+  display: flex;
+  gap: 6px;
+}
+.ticks span {
+  width: 36px;
+  height: 2px;
+  background: rgba(232, 213, 168, 0.25);
+  transition: background-color 0.5s var(--ease);
+}
+.ticks span[data-active="true"] {
+  background: var(--gold);
+}
+.cite {
+  max-width: 26rem;
+}
+@media (max-width: 900px) {
+  .scrim {
+    background: linear-gradient(0deg, rgba(14, 29, 56, 0.97) 0%, rgba(14, 29, 56, 0.85) 42%, rgba(14, 29, 56, 0) 70%);
+  }
+  .inner {
+    align-content: end;
+    padding-bottom: 2.5rem;
+  }
+  .title {
+    font-size: var(--t-2xl);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .step {
+    filter: none;
+    transform: none;
+  }
+}

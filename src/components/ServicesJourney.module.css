@@ -17,6 +17,7 @@
   gap: 0.6rem;
 }
 .figure > :first-child {
+  transition: transform 0.8s var(--ease);
   aspect-ratio: 3 / 2;
   border-radius: var(--radius-m);
   overflow: hidden;
@@ -50,7 +51,18 @@
   transition: width 0.5s var(--ease);
 }
 .step:hover::before {
-  width: 3.5rem;
+  width: 100%;
+}
+.step > div,
+.num {
+  transition: transform 0.5s var(--ease), color 0.3s var(--ease);
+}
+.step:hover > div {
+  transform: translateX(6px);
+}
+.step:hover .num {
+  transform: translateY(-3px);
+  color: var(--gold);
 }
 .num {
   font-family: var(--font-display);
